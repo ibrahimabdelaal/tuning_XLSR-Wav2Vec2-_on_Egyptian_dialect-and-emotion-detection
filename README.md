@@ -8,11 +8,11 @@ We achieved accuracy for emotion reaching 74%.
 
 Download the model and processor from the following links:
 get the model from this drive link https://drive.google.com/drive/folders/1-LKd7eWYIHC0XNQTZoer2o_3kpamZgyB?usp=share_link
-and add pass the path to the model below
+and adjust the path to the model 
 
 
 get the processor from the this drive link https://drive.google.com/drive/folders/11HhaXk0_bBHz_XI6KdTZ8U1vJhQp2rJz?usp=share_link
-and add pass the path to the processor below
+and and adjust the path to the processor 
 
 
 To run file our_model.py on the local machine 
