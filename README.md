@@ -1,7 +1,7 @@
 # tuning_XLSR-Wav2Vec2-_on_Egyptian_dialect-and-emotion-detection
 
 our work
-Wav2Vec is trained on a large dataset of speech samples and is able to extract high-level features from the speech signal that are useful for both emotion recognition and speech recognition tasks. The proposed approach is evaluated on a benchmark dataset of spoken emotions and shows promising results, outperforming existing methods in both emotion recognition and speech recognition tasks[2]. The approach is also shown to be robust to variations in speaking styles and environmental conditions. We  trained our speech recognition model on a dataset consisting of 5.5 hours which is 3041 audio.
+Wav2Vec is trained on a large dataset of speech samples and is able to extract high-level features from the speech signal that are useful for both emotion recognition and speech recognition tasks. The proposed approach is evaluated on a benchmark dataset of spoken emotions and shows promising results, outperforming existing methods in both emotion recognition and speech recognition tasks. The approach is also shown to be robust to variations in speaking styles and environmental conditions. We  trained our speech recognition model on a dataset consisting of 5.5 hours which is 3041 audio.
 We achieved a word error rate(WER) of 33%. For emotion recognition, we used Egyptian Arabic seminatural emotional speech (EYASE) database created from an award winning Egyptian drama series. 
 We achieved accuracy for emotion reaching 74%. 
 
