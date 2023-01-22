@@ -1,0 +1,6 @@
+datasets==2.1.0
+transformers==4.18.0
+torchaudio
+librosa
+jiwer
+pydub
