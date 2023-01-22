@@ -16,8 +16,11 @@ and add pass the path to the processor below
 
 
 To run file our_model.py on the local machine 
+
 1-pip install -r requrirement.txt
+
 2-adjust the paths for the model,processor and audio file inside the file
+
 3-recording also is provided in the file,see function speech_to_text
 
 
