@@ -87,8 +87,8 @@ def specch_to_text(audiofile='',rec=0):
        record(sec=5)
        path="output.wav"
   else :
-      "no audio file detected "
-      return
+        print("no audio file detected ")
+        return
   dftest = pd.DataFrame(columns=['audio'])
   dftest['audio']=[path]  
   test_dataset1 = Dataset.from_pandas(dftest)
