@@ -11,40 +11,46 @@ import torchaudio
 from datasets import load_dataset
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 from pydub import AudioSegment
-
+import pyaudio
+import wave
 
 
 
 ### recording function##
-RECORD = """
-const sleep  = time => new Promise(resolve => setTimeout(resolve, time))
-const b2text = blob => new Promise(resolve => {
-  const reader = new FileReader()
-  reader.onloadend = e => resolve(e.srcElement.result)
-  reader.readAsDataURL(blob)
-})
-var record = time => new Promise(async resolve => {
-  stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-  recorder = new MediaRecorder(stream)
-  chunks = []
-  recorder.ondataavailable = e => chunks.push(e.data)
-  recorder.start()
-  await sleep(time)
-  recorder.onstop = async ()=>{
-    blob = new Blob(chunks)
-    text = await b2text(blob)
-    resolve(text)
-  }
-  recorder.stop()
-})
-"""
-def record(sec=3):
-  display(Javascript(RECORD))
-  s = output.eval_js('record(%d)' % (sec*1000))
-  b = b64decode(s.split(',')[1])
-  audio = AudioSegment.from_file(BytesIO(b))
-  return audio
-
+def record(sec=6):
+    # Record in chunks of 1024 samples
+    chunk = 1024 
+    # 16 bits per sample
+    sample_format = pyaudio.paInt16 
+    chanels = 1
+    # Record at 44400 samples per second
+    smpl_rt = 44400 
+    seconds = sec
+    filename = "output.wav"
+    # Create an interface to PortAudio
+    pa = pyaudio.PyAudio() 
+    stream = pa.open(format=sample_format, channels=chanels,
+                    rate=smpl_rt, input=True,
+                    frames_per_buffer=chunk)
+    print('Recording...')
+    frames = [] 
+    # Store data in chunks for 8 seconds
+    for i in range(0, int(smpl_rt / chunk * seconds)):
+        data = stream.read(chunk)
+        frames.append(data)
+    # Stop and close the stream
+    stream.stop_stream()
+    stream.close()
+    # Terminate - PortAudio interface
+    pa.terminate()
+    print('Done !!! ')
+    # Save the recorded data in a .wav format
+    sf = wave.open(filename, 'wb')
+    sf.setnchannels(chanels)
+    sf.setsampwidth(pa.get_sample_size(sample_format))
+    sf.setframerate(smpl_rt)
+    sf.writeframes(b''.join(frames))
+    sf.close()
 ####
 
 
@@ -73,14 +79,12 @@ def speech_file_to_array_fn(batch):
 
 
 
-def specch_to_text(audiofile='',record=0):
+def specch_to_text(audiofile='',rec=0):
   if audiofile!='':
     path=audiofile
-  elif record:
+  elif rec:
        print("recording start for 5 second,speak please")
-       audio=record(sec=5)
-       audio.export(out_f = "output.wav",
-                        format = "wav")
+       record(sec=5)
        path="output.wav"
   else :
       "no audio file detected "
@@ -103,4 +107,4 @@ def specch_to_text(audiofile='',record=0):
 
 
 ## Run this function to return prediction
-print(specch_to_text(audiofile='G:\Year5_fall\math pro/3255.wav',record=0))
+print(specch_to_text(audiofile='',rec=1))
