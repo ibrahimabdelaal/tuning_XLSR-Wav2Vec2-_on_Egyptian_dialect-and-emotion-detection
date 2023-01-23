@@ -25,5 +25,7 @@ To run file our_model.py on the local machine
 
 
 References:
+
 dataset for emotion detection upon request https://www.researchgate.net/publication/341001383_EYASE_Database
+
 Egytian corpus  https://magichub.com/datasets/egyptian-arabic-conversational-speech-corpus/
